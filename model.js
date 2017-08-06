@@ -86,7 +86,11 @@ var matcherModel = {
         }
 
         return correct;
-    }
+    },
+
+    setSelectedCard: function(id){
+        this.selectedCard =  this.getCard(id);
+    },
 };
 
 

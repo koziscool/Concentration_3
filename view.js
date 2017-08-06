@@ -37,6 +37,15 @@ var matcherView = {
 
     revealCard: function( cardId ){
         $('#card-' + cardId).addClass('revealed');
+    }, 
+
+    setCorrect: function( cardId ){
+        $('#card-' + cardId).off('click');
+        $('#card-' + cardId).addClass('correct')
+    },
+
+    hideCards: function() {
+        $('.card').not('.correct').removeClass('revealed');
     }
 
 };

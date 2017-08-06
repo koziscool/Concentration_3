@@ -22,10 +22,26 @@ var matcherController = {
         this.view.revealCard( cardId );
 
         if( this.model.selectedCard ){
-            var selectedCard = this.model.selectedCard;
+            var selectedId = this.model.selectedCard.id;
             var correct = this.model.checkGuess(cardId);
             this.view.updateGameView();
             var that = this;
+
+            if (correct) {
+                setTimeout( function() {
+                    that.view.setCorrect(cardId);
+                    that.view.setCorrect(selectedId);
+                    that.selecting = false;
+                }, 500);
+            } else {
+                setTimeout( function() {
+                    that.view.hideCards();
+                    that.selecting = false;
+                }, 1500);
+            }
+        } else {
+            this.model.setSelectedCard(cardId);
+            this.selecting = false;
         }
 
     }
