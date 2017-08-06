@@ -5,7 +5,12 @@ var matcherModel = {
     cardValues: [ "A", "B", "C", "D", "E", "F", "G", "H" ],
     cards: [],
     totalCards: 0,
+    matchedCards: 0,
+    numGuesses: 0,
     currentId: 1,
+    selectedCard: null,
+
+    gameStateText: "You haven't won yet, keep going.",
 
     init: function(size) {
         this.size = size || this.size;
@@ -13,6 +18,7 @@ var matcherModel = {
         for( var i = 0; i < totalPairs; i++  ) {
             this.addPair();
         }
+        this.shuffle();
     },
 
     addPair: function() {
@@ -32,6 +38,19 @@ var matcherModel = {
         return id;
     },
 
+    shuffle: function() {
+        var currentIndex = this.cards.length, temp, rand;
+
+        while( currentIndex > 0 ){
+            rand = Math.floor( Math.random() * currentIndex);
+            currentIndex--;
+
+            temp = this.cards[currentIndex];
+            this.cards[currentIndex] = this.cards[rand];
+            this.cards[rand] = temp;
+        }
+    },
+
     Card: function( id, value ) {
         this.id = id;
         this.value = value;
@@ -39,8 +58,38 @@ var matcherModel = {
         this.matches = function(otherCard) {
             return this.value === otherCard.value
         }
+    },
 
+    getCard: function( cardId ){
+        for( var index in this.cards ){
+            if (this.cards[index].id === cardId ) return this.cards[index];
+        }
+        return null;
+    },
+
+    sameCard: function(cardId){
+        return this.selectedCard && this.selectedCard.id === cardId;
+    },
+
+    checkGuess: function( cardId ){
+        this.numGuesses++;
+
+        var thisCard = this.getCard( cardId );
+        var correct = false;
+        if( this.selectedCard ) correct = this.selectedCard.matches( thisCard );
+
+        if( correct ) this.matchedCards += 2;
+
+        this.selectedCard = null;
+        if( this.matchedCards === this.totalCards) {
+            this.gameStateText = "Congratulations, you win."
+        }
+
+        return correct;
     }
-
-
 };
+
+
+
+
+
