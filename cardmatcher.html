@@ -11,6 +11,12 @@
     <div class="game-info-container">
 
         <div class="game-info section">
+            <div id="game-state-text">
+                Enter a grid size and click on a card
+            </div>
+        </div>
+
+        <div class="section">
             Num guesses:
             <div id="num-guesses"></div>
         </div>
@@ -27,6 +33,14 @@
     </div>
 
     <div class="form-container">
+        <form>
+            <label for="grid_size">Grid Size</label>
+            <br>
+            <input type="text" id="grid_size" name="grid_size"></input>
+            <br>
+            <input type="submit" value= "Create Grid"></input>
+            <br>
+        </form> 
     </div>
 
     <div class="grid-container">
