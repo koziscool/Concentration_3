@@ -26,3 +26,20 @@
     text-align: center;
     margin: 0 auto;
 }
+
+.grid-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.card {
+    height: 50px;
+    display: inline-block;
+    background-color: lightyellow;
+    text-align: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin: 1%;
+    transition: all 0.5s;
+    transform: rotateY(180deg);
+}
